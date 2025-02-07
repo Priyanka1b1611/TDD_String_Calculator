@@ -4,16 +4,20 @@ class StringCalculator {
 
     RegExp delimiterPattern = RegExp(r'[,\n]'); // Default delimiters: comma or newline
 
-    // Check for custom delimiter
     if (numbers.startsWith('//')) {
       var parts = numbers.split('\n');
-      delimiterPattern = RegExp(RegExp.escape(parts[0].substring(2))); // Extract custom delimiter
+      delimiterPattern = RegExp(RegExp.escape(parts[0].substring(2))); // Extract delimiter
       numbers = parts[1]; // Remove delimiter declaration
     }
 
-    var numList = numbers.split(delimiterPattern); // Use RegExp to split
+    var numList = numbers.split(delimiterPattern);
+    var parsedNumbers = numList.where((num) => num.isNotEmpty).map(int.parse).toList();
 
-    var parsedNumbers = numList.where((num) => num.isNotEmpty).map(int.parse);
+    // Collect negative numbers
+    var negatives = parsedNumbers.where((n) => n < 0).toList();
+    if (negatives.isNotEmpty) {
+      throw Exception('negative numbers not allowed: ${negatives.join(', ')}');
+    }
 
     return parsedNumbers.reduce((a, b) => a + b);
   }
