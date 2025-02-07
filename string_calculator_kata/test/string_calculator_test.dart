@@ -10,4 +10,8 @@ void main() {
     expect(StringCalculator.add('1'), equals(1));
   });
 
+  test('Two numbers should return their sum', () {
+    expect(StringCalculator.add('1,2'), equals(3));
+  });
+
 }
