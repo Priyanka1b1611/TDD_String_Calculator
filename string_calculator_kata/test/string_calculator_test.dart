@@ -18,5 +18,9 @@ void main() {
     expect(StringCalculator.add('1,2,3,4'), equals(10));
   });
 
+  test('New line as a delimiter should work like a comma', () {
+    expect(StringCalculator.add('1\n2,3'), equals(6));
+  });
+
 
 }
