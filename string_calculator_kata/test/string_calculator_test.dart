@@ -22,5 +22,8 @@ void main() {
     expect(StringCalculator.add('1\n2,3'), equals(6));
   });
 
+  test('Support custom delimiter', () {
+    expect(StringCalculator.add('//;\n1;2'), equals(3));
+  });
 
 }
